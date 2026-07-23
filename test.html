@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teeth Detection - Professional</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .upload-box {
+            background-color: #e3f2fd;
+            border: 2px dashed #90caf9;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .upload-box:hover {
+            background-color: #bbdefb;
+        }
+        .upload-box input {
+            display: none;
+        }
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .image-preview img {
+            margin: 10px;
+            width: 48%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #4a90e2;
+            color: white;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+        input[type=submit] {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type=submit]:hover {
+            background-color: #357ab7;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Teeth Detection</h1>
+        <p>Upload Teeth X-ray Images for Detection</p>
+    </header>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="upload-box">
+                <label for="file-upload">Click to select up to 10 images</label>
+                <input type="file" id="file-upload" name="files[]" accept="image/*" multiple>
+            </div>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+        {% if result_paths %}
+        <h2>Results:</h2>
+        <div class="image-preview">
+            {% for result_path in result_paths %}
+            <img src="{{ url_for('static', filename=result_path) }}" alt="Detected Teeth">
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+        <p>&copy; 2024 Teeth Detection. All rights reserved.</p>
+    </footer>
+</body>
+</html>
